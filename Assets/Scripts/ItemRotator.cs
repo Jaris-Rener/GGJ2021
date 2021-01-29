@@ -42,7 +42,7 @@ public class ItemRotator
         transform.DORotate(new Vector3(0, 360f/CollectedObjects.Length, 0), 1f).SetRelative(true);
         --_currentObjIndex;
         if (_currentObjIndex < 0)
-            _currentObjIndex = CollectedObjects.Length;
+            _currentObjIndex = CollectedObjects.Length - 1;
 
         CurrentObject = CollectedObjects[_currentObjIndex];
         CurrentObject.transform.rotation = Quaternion.identity;
