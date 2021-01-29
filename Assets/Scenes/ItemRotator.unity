@@ -201,7 +201,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
-  m_ShadowAngle: 3.8
+  m_ShadowAngle: 3.5
 --- !u!4 &705507995
 Transform:
   m_ObjectHideFlags: 0
@@ -437,7 +437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0665c2975122003458947375fa15b464, type: 3}
       propertyPath: m_Name
-      value: icecream
+      value: Popsicle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0665c2975122003458947375fa15b464, type: 3}
