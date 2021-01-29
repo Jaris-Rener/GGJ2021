@@ -1,18 +1,19 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using Input = UnityEngine.Input;
 
 public class ItemRotator
     : MonoBehaviour
 {
     public Camera Camera;
-    public GameObject[] CollectedObjects;
-    public GameObject CurrentObject;
+    public Item[] CollectedObjects;
+    public Item CurrentObject;
     public float RotSpeed = 1f;
     public float Drag = 1f;
     public float CameraZoom = 5;
+
+    public event Action<Item> OnItemChange;
 
     private Vector3 _startPos;
     private Vector3 _endPos;
@@ -33,6 +34,8 @@ public class ItemRotator
         CurrentObject = CollectedObjects[_currentObjIndex];
         CurrentObject.transform.rotation = Quaternion.identity;
         _dir = Vector3.zero;
+
+        OnItemChange?.Invoke(CurrentObject);
     }
     
     [ContextMenu("Previous")]
@@ -47,9 +50,11 @@ public class ItemRotator
         CurrentObject = CollectedObjects[_currentObjIndex];
         CurrentObject.transform.rotation = Quaternion.identity;
         _dir = Vector3.zero;
+
+        OnItemChange?.Invoke(CurrentObject);
     }
 
-    private void Start()
+    private void Awake()
     {
         SetupItems();
         _cameraFov = Camera.fieldOfView;
