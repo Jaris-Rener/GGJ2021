@@ -967,6 +967,8 @@ MonoBehaviour:
   items:
   - {fileID: 2059636563}
   - {fileID: 195971406}
+  startPos: {x: 0, y: 0, z: 0}
+  startRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &748083135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,6 +1082,8 @@ MonoBehaviour:
   items:
   - {fileID: 1332099562}
   - {fileID: 1469124615}
+  startPos: {x: 0, y: 0, z: 0}
+  startRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &771014826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,6 +1547,8 @@ MonoBehaviour:
   items:
   - {fileID: 1849614687}
   - {fileID: 1905958220}
+  startPos: {x: 0, y: 0, z: 0}
+  startRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &947088069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,7 +2169,7 @@ MonoBehaviour:
   - {fileID: 922270916}
   - {fileID: 748083140}
   items: []
-  moveTime: 1
+  moveTime: 0.375
   inspectTF: {fileID: 526006999}
   itemTF: {fileID: 1767367840}
   rotator: {fileID: 1107790002}
@@ -2945,6 +2951,8 @@ MonoBehaviour:
   items:
   - {fileID: 62567515}
   - {fileID: 1090112785}
+  startPos: {x: 0, y: 0, z: 0}
+  startRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!4 &2059636559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5535408720335649714, guid: 2857ff850aad8694d8b41b7c58f02460, type: 3}
