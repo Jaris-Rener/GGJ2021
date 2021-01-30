@@ -7,8 +7,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ENV_Brick
+    second: {fileID: 2100000, guid: 04ca7ea39e48390408da5c661dca20c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: ENV_Concrete
     second: {fileID: 2100000, guid: 1cc58e51715db6c4fa7000e0b01b5b48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ENV_GarageDoor
+    second: {fileID: 2100000, guid: 520ee08cc9c6a9f42b3c4d8b9802be08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ENV_Grass
+    second: {fileID: 2100000, guid: 872a22416f6d4a1419e902e0f5e6112d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ENV_Paint
+    second: {fileID: 2100000, guid: df49e1752ed0e3c4086f3cf97c58b4e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ENV_Roof
+    second: {fileID: 2100000, guid: 4c6be2612ca00c044a685e1abe011b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ENV_Windows
+    second: {fileID: 2100000, guid: 4348bc112eb627541ab259d40b031192, type: 2}
   materials:
     materialImportMode: 2
     materialName: 1
