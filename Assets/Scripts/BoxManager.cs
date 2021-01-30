@@ -56,7 +56,7 @@ public class BoxManager : MonoBehaviour
     {
         rotator.SetItem(null);
         selectedItem.transform.DOLocalMove(selectedItem.StartPosLocal, moveTime);
-        selectedItem.transform.DORotateQuaternion(selectedItem.StartRot, moveTime);
+        selectedItem.transform.DOLocalRotateQuaternion(selectedItem.StartRotLocal, moveTime);
     }
 
     //assigns items to boxes

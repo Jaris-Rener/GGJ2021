@@ -8,12 +8,12 @@ public class Item : MonoBehaviour
     public Collider Collider;
 
     public Vector3 StartPosLocal;
-    public Quaternion StartRot;
+    public Quaternion StartRotLocal;
 
     private void Awake()
     {
         StartPosLocal = transform.localPosition;
-        StartRot = transform.rotation;
+        StartRotLocal = transform.localRotation;
     }
 
     public void ToggleCollider(bool active) => Collider.enabled = active;
