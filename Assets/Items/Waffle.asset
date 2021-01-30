@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Waffle
   m_EditorClassIdentifier: 
   Name: Waffle
-  Description: The pancakes superior sibling...
+  Description: The pancake's superior sibling...
   Tags:
   - {fileID: 11400000, guid: be28f9bebd9363147a935f54dcaca434, type: 2}
   - {fileID: 11400000, guid: b26bb028fb53c034f991bdb9d2cbcf6e, type: 2}
