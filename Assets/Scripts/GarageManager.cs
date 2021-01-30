@@ -10,8 +10,6 @@ public class GarageManager : MonoBehaviour, IStateManaged
     [SerializeField] private LayerMask itemLayer;
     private LayerMask currentLayer;
 
-    [SerializeField] private GameObject boxOverlay;
-
     private StateMachine stateMachine = new StateMachine();
     public static GarageManager instance;
 
@@ -35,22 +33,25 @@ public class GarageManager : MonoBehaviour, IStateManaged
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, currentLayer))
         {
-            if (stateMachine.currentState is GarageState)
+            if (stateMachine.currentState is GarageState) {
+                BoxManager.instance?.SetActiveBox(hit.collider.GetComponent<Box>());
                 RequestState(new BoxState(this));
-            else if (stateMachine.currentState is BoxState)
+            }
+            else if (stateMachine.currentState is BoxState) {
                 RequestState(new ItemState(this));
+            }
         }
     }
 
     private void SetLayer(LayerMask layer) => currentLayer = layer;
 
-    private void SetBoxOverlay(bool active) => boxOverlay.SetActive(active);
-
     public void ReturnBox() {
         if (stateMachine.currentState is ItemState)
             RequestState(new BoxState(this));
-        else if (stateMachine.currentState is BoxState)
+        else if (stateMachine.currentState is BoxState) {
+            BoxManager.instance?.ReturnBox();
             RequestState(new GarageState(this));
+        }
     }
 
     #region States
@@ -77,7 +78,6 @@ public class GarageManager : MonoBehaviour, IStateManaged
 
         public void Enter() { 
             manager.SetLayer(manager.boxLayer);
-            manager.SetBoxOverlay(false);
         }
 
         public void Execute() {
@@ -94,7 +94,6 @@ public class GarageManager : MonoBehaviour, IStateManaged
 
         public void Enter() {
             manager.SetLayer(manager.itemLayer);
-            manager.SetBoxOverlay(true);
         }
         public void Execute() {
             manager.CheckMouseInput();
