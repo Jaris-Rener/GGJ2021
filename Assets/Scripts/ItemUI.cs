@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +14,16 @@ public class ItemUI : MonoBehaviour
     private void Start()
     {
         UpdateUI(Rotator.CurrentObject);
+        AcceptButton.onClick.AddListener(AcceptItem);
+    }
+
+    private void AcceptItem()
+    {
+        var item = Rotator.CurrentObject;
+        Rotator.SetItem(null);
+        item.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
+
+        ItemManager.Instance.AddItem(item);
     }
 
     private void OnEnable()

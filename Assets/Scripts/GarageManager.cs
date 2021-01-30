@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,13 @@ public class GarageManager : MonoBehaviour, IStateManaged
 
     private void Awake() {
         instance = this;
+        stateMachine.ChangeState(new GarageState(this));
+    }
+
+    private void Start()
+    {
         UIManager.instance?.ToggleBoxCanvas(false);
         UIManager.instance?.ToggleItemCanvas(false);
-        stateMachine.ChangeState(new GarageState(this));
     }
 
     private void Update() {
