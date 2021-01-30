@@ -25,9 +25,6 @@ public class GalleryUI
 
     private void UpdateUI(Item item)
     {
-        if(item == null)
-            return;
-
         ItemName.text = item.Data.Name;
         ItemDescription.text = item.Data.Description;
     }

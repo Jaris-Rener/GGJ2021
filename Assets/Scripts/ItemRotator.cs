@@ -1,39 +1,82 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
+using Input = UnityEngine.Input;
 
 public class ItemRotator
     : MonoBehaviour
 {
-    public Item CurrentObject { get; private set; }
-
     public Camera Camera;
+    public Item[] CollectedObjects;
+    public Item CurrentObject;
     public float RotSpeed = 1f;
     public float Drag = 1f;
     public float CameraZoom = 5;
+
+    public event Action<Item> OnItemChange;
 
     private Vector3 _startPos;
     private Vector3 _endPos;
     private Vector3 _dir;
     private float _cameraFov;
-    public event Action<Item> OnItemChange;
 
-    private void Start()
+    private int _currentObjIndex;
+
+    [ContextMenu("Next")]
+    public void NextItem()
     {
+        transform.DOComplete();
+        transform.DORotate(new Vector3(0, -360f/CollectedObjects.Length, 0), 1f).SetRelative(true);
+        ++_currentObjIndex;
+        if (_currentObjIndex >= CollectedObjects.Length)
+            _currentObjIndex = 0;
+
+        CurrentObject = CollectedObjects[_currentObjIndex];
+        CurrentObject.transform.rotation = Quaternion.identity;
+        _dir = Vector3.zero;
+
+        OnItemChange?.Invoke(CurrentObject);
+    }
+    
+    [ContextMenu("Previous")]
+    public void PreviousItem()
+    {
+        transform.DOComplete();
+        transform.DORotate(new Vector3(0, 360f/CollectedObjects.Length, 0), 1f).SetRelative(true);
+        --_currentObjIndex;
+        if (_currentObjIndex < 0)
+            _currentObjIndex = CollectedObjects.Length - 1;
+
+        CurrentObject = CollectedObjects[_currentObjIndex];
+        CurrentObject.transform.rotation = Quaternion.identity;
+        _dir = Vector3.zero;
+
+        OnItemChange?.Invoke(CurrentObject);
+    }
+
+    private void Awake()
+    {
+        SetupItems();
         _cameraFov = Camera.fieldOfView;
     }
 
-    public void SetItem(Item item)
+    [ContextMenu("Layout")]
+    private void SetupItems()
     {
-        CurrentObject = item;
-        OnItemChange?.Invoke(item);
+        for (var i = 0; i < CollectedObjects.Length; i++)
+        {
+            var obj = CollectedObjects[i];
+            var f = ((float)i/CollectedObjects.Length)*Mathf.PI*2;
+            obj.transform.position = transform.position + new Vector3(Mathf.Sin(f), 0, Mathf.Cos(f))*5f;
+            obj.transform.SetParent(transform);
+        }
+
+        CurrentObject = CollectedObjects[0];
     }
 
     private void Update()
     {
-        if(CurrentObject == null)
-            return;
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             _dir = Vector3.zero;
             CurrentObject.transform.rotation = Quaternion.identity;
@@ -76,11 +119,5 @@ public class ItemRotator
     private void OnDragStart()
     {
         _startPos = Input.mousePosition;
-    }
-
-    public void ZeroMovement()
-    {
-        CurrentObject.transform.rotation = Quaternion.identity;
-        _dir = Vector3.zero;
     }
 }

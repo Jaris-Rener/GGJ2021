@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 383342569724557517}
   - component: {fileID: 383342569723460109}
   - component: {fileID: 383342568952647679}
-  - component: {fileID: 5298459616460932736}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Popsicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383342569721193677}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.9091575, y: 0, z: 3.117449}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -96,19 +95,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: 6897a1367e2b77b409a93bfb7fb33ce5, type: 2}
-  MeshRenderer: {fileID: 383342569723460109}
-  Collider: {fileID: 5298459616460932736}
---- !u!64 &5298459616460932736
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383342569721193677}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 6da9d5cde97ad394e97f1227e5fbf342, type: 3}
