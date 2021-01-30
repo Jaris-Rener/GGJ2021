@@ -25,24 +25,30 @@ public class ItemRotator
     [ContextMenu("Next")]
     public void NextItem()
     {
-        transform.DOComplete();
-        transform.DORotate(new Vector3(0, -360f/CollectedObjects.Length, 0), 1f).SetRelative(true);
+        CurrentObject.MeshRenderer.material.DOFade(0.0f, 0.4f).SetEase(Ease.InQuart);
+        CurrentObject.transform.DOMove(_layoutPositionLeft, 0.6f);
+
         ++_currentObjIndex;
         if (_currentObjIndex >= CollectedObjects.Length)
             _currentObjIndex = 0;
-
+        
         CurrentObject = CollectedObjects[_currentObjIndex];
         CurrentObject.transform.rotation = Quaternion.identity;
         _dir = Vector3.zero;
+        
+        CurrentObject.transform.position = _layoutPositionRight;
+
+        CurrentObject.MeshRenderer.material.DOFade(1.0f, 0.4f).SetEase(Ease.InQuart);
+        CurrentObject.transform.DOMove(_layoutPositionMid, 0.6f);
 
         OnItemChange?.Invoke(CurrentObject);
     }
-    
+
     [ContextMenu("Previous")]
     public void PreviousItem()
     {
         transform.DOComplete();
-        transform.DORotate(new Vector3(0, 360f/CollectedObjects.Length, 0), 1f).SetRelative(true);
+        transform.DORotate(new Vector3(0, 360f / CollectedObjects.Length, 0), 1f).SetRelative(true);
         --_currentObjIndex;
         if (_currentObjIndex < 0)
             _currentObjIndex = CollectedObjects.Length - 1;
@@ -60,15 +66,20 @@ public class ItemRotator
         _cameraFov = Camera.fieldOfView;
     }
 
+    private Vector3 _layoutPositionLeft => transform.position + new Vector3(-0.7f, 0, -0.3f);
+    private Vector3 _layoutPositionMid => transform.position;
+    private Vector3 _layoutPositionRight => transform.position + new Vector3(0.7f, 0, -0.3f);
+
     [ContextMenu("Layout")]
     private void SetupItems()
     {
-        for (var i = 0; i < CollectedObjects.Length; i++)
+        CollectedObjects[CollectedObjects.Length - 1].transform.position = _layoutPositionRight;
+        CollectedObjects[0].transform.position = _layoutPositionMid;
+        CollectedObjects[1].transform.position = _layoutPositionLeft;
+
+        for (int i = 1; i < CollectedObjects.Length; i++)
         {
-            var obj = CollectedObjects[i];
-            var f = ((float)i/CollectedObjects.Length)*Mathf.PI*2;
-            obj.transform.position = transform.position + new Vector3(Mathf.Sin(f), 0, Mathf.Cos(f))*5f;
-            obj.transform.SetParent(transform);
+            CollectedObjects[i].MeshRenderer.material.color = new Color(1f, 1f, 1f, 0f);
         }
 
         CurrentObject = CollectedObjects[0];
@@ -76,7 +87,7 @@ public class ItemRotator
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             _dir = Vector3.zero;
             CurrentObject.transform.rotation = Quaternion.identity;
