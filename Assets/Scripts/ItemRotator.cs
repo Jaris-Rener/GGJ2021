@@ -47,15 +47,21 @@ public class ItemRotator
     [ContextMenu("Previous")]
     public void PreviousItem()
     {
-        transform.DOComplete();
-        transform.DORotate(new Vector3(0, 360f / CollectedObjects.Length, 0), 1f).SetRelative(true);
+        CurrentObject.MeshRenderer.material.DOFade(0.0f, 0.4f).SetEase(Ease.OutQuart);
+        CurrentObject.transform.DOMove(_layoutPositionRight, 0.6f);
+
         --_currentObjIndex;
         if (_currentObjIndex < 0)
             _currentObjIndex = CollectedObjects.Length - 1;
-
+        
         CurrentObject = CollectedObjects[_currentObjIndex];
         CurrentObject.transform.rotation = Quaternion.identity;
         _dir = Vector3.zero;
+        
+        CurrentObject.transform.position = _layoutPositionLeft;
+
+        CurrentObject.MeshRenderer.material.DOFade(1.0f, 0.4f).SetEase(Ease.InQuart);
+        CurrentObject.transform.DOMove(_layoutPositionMid, 0.6f);
 
         OnItemChange?.Invoke(CurrentObject);
     }
