@@ -25,7 +25,7 @@ public class ItemRotator
     [ContextMenu("Next")]
     public void NextItem()
     {
-        CurrentObject.MeshRenderer.material.DOFade(0.0f, 0.4f).SetEase(Ease.InQuart);
+        CurrentObject.MeshRenderer.material.DOFade(0.0f, 0.4f).SetEase(Ease.OutQuart);
         CurrentObject.transform.DOMove(_layoutPositionLeft, 0.6f);
 
         ++_currentObjIndex;
