@@ -95,3 +95,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: bb6e4f474e2742f4dbcafe61c27278a4, type: 2}
+  MeshRenderer: {fileID: 4143285675978990918}
