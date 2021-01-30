@@ -1,98 +1,38 @@
 using System;
-using DG.Tweening;
 using UnityEngine;
-using Input = UnityEngine.Input;
 
 public class ItemRotator
     : MonoBehaviour
 {
+    public Item CurrentObject { get; private set; }
+
     public Camera Camera;
-    public Item[] CollectedObjects;
-    public Item CurrentObject;
     public float RotSpeed = 1f;
     public float Drag = 1f;
     public float CameraZoom = 5;
-
-    public event Action<Item> OnItemChange;
 
     private Vector3 _startPos;
     private Vector3 _endPos;
     private Vector3 _dir;
     private float _cameraFov;
+    public event Action<Item> OnItemChange;
 
-    private int _currentObjIndex;
-
-    [ContextMenu("Next")]
-    public void NextItem()
+    private void Start()
     {
-        CurrentObject.MeshRenderer.material.DOFade(0.0f, 0.4f).SetEase(Ease.OutQuart);
-        CurrentObject.transform.DOMove(_layoutPositionLeft, 0.6f);
-
-        ++_currentObjIndex;
-        if (_currentObjIndex >= CollectedObjects.Length)
-            _currentObjIndex = 0;
-        
-        CurrentObject = CollectedObjects[_currentObjIndex];
-        CurrentObject.transform.rotation = Quaternion.identity;
-        _dir = Vector3.zero;
-        
-        CurrentObject.transform.position = _layoutPositionRight;
-
-        CurrentObject.MeshRenderer.material.DOFade(1.0f, 0.4f).SetEase(Ease.InQuart);
-        CurrentObject.transform.DOMove(_layoutPositionMid, 0.6f);
-
-        OnItemChange?.Invoke(CurrentObject);
-    }
-
-    [ContextMenu("Previous")]
-    public void PreviousItem()
-    {
-        CurrentObject.MeshRenderer.material.DOFade(0.0f, 0.4f).SetEase(Ease.OutQuart);
-        CurrentObject.transform.DOMove(_layoutPositionRight, 0.6f);
-
-        --_currentObjIndex;
-        if (_currentObjIndex < 0)
-            _currentObjIndex = CollectedObjects.Length - 1;
-        
-        CurrentObject = CollectedObjects[_currentObjIndex];
-        CurrentObject.transform.rotation = Quaternion.identity;
-        _dir = Vector3.zero;
-        
-        CurrentObject.transform.position = _layoutPositionLeft;
-
-        CurrentObject.MeshRenderer.material.DOFade(1.0f, 0.4f).SetEase(Ease.InQuart);
-        CurrentObject.transform.DOMove(_layoutPositionMid, 0.6f);
-
-        OnItemChange?.Invoke(CurrentObject);
-    }
-
-    private void Awake()
-    {
-        SetupItems();
         _cameraFov = Camera.fieldOfView;
     }
 
-    private Vector3 _layoutPositionLeft => transform.position + new Vector3(-0.7f, 0, -0.3f);
-    private Vector3 _layoutPositionMid => transform.position;
-    private Vector3 _layoutPositionRight => transform.position + new Vector3(0.7f, 0, -0.3f);
-
-    [ContextMenu("Layout")]
-    private void SetupItems()
+    public void SetItem(Item item)
     {
-        CollectedObjects[CollectedObjects.Length - 1].transform.position = _layoutPositionRight;
-        CollectedObjects[0].transform.position = _layoutPositionMid;
-        CollectedObjects[1].transform.position = _layoutPositionLeft;
-
-        for (int i = 1; i < CollectedObjects.Length; i++)
-        {
-            CollectedObjects[i].MeshRenderer.material.color = new Color(1f, 1f, 1f, 0f);
-        }
-
-        CurrentObject = CollectedObjects[0];
+        CurrentObject = item;
+        OnItemChange?.Invoke(item);
     }
 
     private void Update()
     {
+        if(CurrentObject == null)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _dir = Vector3.zero;
@@ -136,5 +76,11 @@ public class ItemRotator
     private void OnDragStart()
     {
         _startPos = Input.mousePosition;
+    }
+
+    public void ZeroMovement()
+    {
+        CurrentObject.transform.rotation = Quaternion.identity;
+        _dir = Vector3.zero;
     }
 }

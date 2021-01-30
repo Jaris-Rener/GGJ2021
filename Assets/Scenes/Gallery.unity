@@ -890,7 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990d93134f579d04aa85a745d716c34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rotator: {fileID: 1935242091}
+  Rotator: {fileID: 1935242092}
   ItemName: {fileID: 771719358}
   ItemDescription: {fileID: 483906468}
 --- !u!1 &771719356
@@ -1837,6 +1837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1935242090}
   - component: {fileID: 1935242091}
+  - component: {fileID: 1935242092}
   m_Layer: 0
   m_Name: ItemRotator
   m_TagString: Untagged
@@ -1874,16 +1875,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88067020de178f74190db11af21d2f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 963194227}
   CollectedObjects:
   - {fileID: 2128458646}
   - {fileID: 411781272}
   - {fileID: 5535408720467348974}
   - {fileID: 5640956161455494396}
   CurrentObject: {fileID: 0}
+  Rotator: {fileID: 1935242092}
+--- !u!114 &1935242092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935242089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b09d0f23b404d39b29cf13fae273cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 963194227}
   RotSpeed: 1
-  Drag: 5
-  CameraZoom: 3.5
+  Drag: 1
+  CameraZoom: 1.5
 --- !u!4 &2017130079 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5535408720335649714, guid: 2857ff850aad8694d8b41b7c58f02460, type: 3}

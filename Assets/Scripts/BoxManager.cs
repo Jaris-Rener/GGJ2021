@@ -21,6 +21,7 @@ public class BoxManager : MonoBehaviour
 
     public Transform inspectTF;
     public Transform itemTF;
+    public ItemRotator rotator;
 
     public static BoxManager instance;
 
@@ -51,17 +52,21 @@ public class BoxManager : MonoBehaviour
         boxes[activeIndex].transform.DORotate(startBoxRot, moveTime);
     }
 
-    public void SetActiveItem(Item item) {
+    public void SetActiveItem(Item item)
+    {
         startItemPos = item.transform.localPosition;
         startItemRot = item.transform.rotation;
 
         selectedItem = item;
+        rotator.SetItem(item);
 
         item.transform.DOMove(itemTF.position, moveTime);
         item.transform.DORotateQuaternion(itemTF.rotation, moveTime);
     }
 
-    public void ReturnItem() {
+    public void ReturnItem()
+    {
+        rotator.SetItem(null);
         selectedItem.transform.DOLocalMove(startItemPos, moveTime);
         selectedItem.transform.DORotateQuaternion(startItemRot, moveTime);
     }
