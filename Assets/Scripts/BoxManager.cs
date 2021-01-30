@@ -16,6 +16,7 @@ public class BoxManager : MonoBehaviour
     public Transform inspectTF;
     public Transform itemTF;
     public ItemRotator rotator;
+    public ParticleSystem selectParticles;
 
     public static BoxManager instance;
 
@@ -56,7 +57,14 @@ public class BoxManager : MonoBehaviour
     {
         rotator.SetItem(null);
         selectedItem.transform.DOLocalMove(selectedItem.StartPosLocal, moveTime);
-        selectedItem.transform.DORotateQuaternion(selectedItem.StartRot, moveTime);
+        selectedItem.transform.DOLocalRotateQuaternion(selectedItem.StartRotLocal, moveTime);
+    }
+
+    public void SelectItem() {
+        rotator.SetItem(null);
+        selectedItem.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
+        selectParticles.Play();
+        ItemManager.Instance.AddItem(selectedItem);
     }
 
     //assigns items to boxes

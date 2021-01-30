@@ -20,9 +20,9 @@ public class PhoneMenu : MonoBehaviour {
         }
 
         if (isPhoneOpen) {
-            this.transform.localPosition = Vector3.Lerp(transform.localPosition, PhoneOpen.localPosition, 0.075f);
+            this.transform.localPosition = Vector3.Lerp(transform.localPosition, PhoneOpen.localPosition, 0.03f);
         } else {
-            this.transform.localPosition = Vector3.Lerp(transform.localPosition, PhoneClose.localPosition, 0.075f);
+            this.transform.localPosition = Vector3.Lerp(transform.localPosition, PhoneClose.localPosition, 0.03f);
         }
     }
 

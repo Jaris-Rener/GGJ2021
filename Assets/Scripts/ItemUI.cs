@@ -19,11 +19,7 @@ public class ItemUI : MonoBehaviour
 
     private void AcceptItem()
     {
-        var item = Rotator.CurrentObject;
-        Rotator.SetItem(null);
-        item.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
-
-        ItemManager.Instance.AddItem(item);
+        BoxManager.instance?.SelectItem();
     }
 
     private void OnEnable()
