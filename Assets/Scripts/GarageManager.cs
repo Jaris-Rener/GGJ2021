@@ -15,6 +15,8 @@ public class GarageManager : MonoBehaviour, IStateManaged
 
     private void Awake() {
         instance = this;
+        UIManager.instance?.ToggleBoxCanvas(false);
+        UIManager.instance?.ToggleItemCanvas(false);
         stateMachine.ChangeState(new GarageState(this));
     }
 
@@ -97,12 +99,15 @@ public class GarageManager : MonoBehaviour, IStateManaged
 
         public void Enter() {
             manager.SetLayer(manager.itemLayer);
+            UIManager.instance?.ToggleBoxCanvas(true);
         }
         public void Execute() {
             manager.CheckMouseInput();
         }
 
-        public void Exit() { }
+        public void Exit() {
+            UIManager.instance?.ToggleBoxCanvas(false);
+        }
     }
 
     private class ItemState : IState
@@ -110,9 +115,13 @@ public class GarageManager : MonoBehaviour, IStateManaged
         public GarageManager manager;
         public ItemState(GarageManager manager) { this.manager = manager; }
 
-        public void Enter() { }
+        public void Enter() {
+            UIManager.instance?.ToggleItemCanvas(true);
+        }
         public void Execute() { }
-        public void Exit() { }
+        public void Exit() {
+            UIManager.instance?.ToggleItemCanvas(false);
+        }
     }
     #endregion
 }

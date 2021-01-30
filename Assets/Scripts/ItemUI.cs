@@ -15,8 +15,6 @@ public class ItemUI : MonoBehaviour
     private void Start()
     {
         UpdateUI(Rotator.CurrentObject);
-        AcceptButton.gameObject.SetActive(false);
-        RejectButton.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -33,15 +31,11 @@ public class ItemUI : MonoBehaviour
     {
         if(item == null)
         {
-            AcceptButton.gameObject.SetActive(false);
-            RejectButton.gameObject.SetActive(false);
             ItemName.text = string.Empty;
             ItemDescription.text = string.Empty;
             return;
         }
-        
-        AcceptButton.gameObject.SetActive(true);
-        RejectButton.gameObject.SetActive(true);
+
         ItemName.text = item.Data.Name;
         ItemDescription.text = item.Data.Description;
     }
