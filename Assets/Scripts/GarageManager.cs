@@ -38,6 +38,7 @@ public class GarageManager : MonoBehaviour, IStateManaged
                 RequestState(new BoxState(this));
             }
             else if (stateMachine.currentState is BoxState) {
+                BoxManager.instance?.SetActiveItem(hit.collider.GetComponent<Item>());
                 RequestState(new ItemState(this));
             }
         }
@@ -46,8 +47,10 @@ public class GarageManager : MonoBehaviour, IStateManaged
     private void SetLayer(LayerMask layer) => currentLayer = layer;
 
     public void ReturnBox() {
-        if (stateMachine.currentState is ItemState)
+        if (stateMachine.currentState is ItemState) {
+            BoxManager.instance?.ReturnItem();
             RequestState(new BoxState(this));
+        }
         else if (stateMachine.currentState is BoxState) {
             BoxManager.instance?.ReturnBox();
             RequestState(new GarageState(this));

@@ -11,11 +11,16 @@ public class BoxManager : MonoBehaviour
     public float moveTime = 1f;
 
     private int activeIndex;
+    private Item selectedItem;
 
-    private Vector3 startPos;
-    private Vector3 startRot;
+    private Vector3 startBoxPos;
+    private Vector3 startBoxRot;
+
+    private Vector3 startItemPos;
+    private Quaternion startItemRot;
 
     public Transform inspectTF;
+    public Transform itemTF;
 
     public static BoxManager instance;
 
@@ -30,16 +35,35 @@ public class BoxManager : MonoBehaviour
                 activeIndex = i;
         }
 
-        startPos = box.transform.position;
-        startRot = box.transform.localEulerAngles;
+        startBoxPos = box.transform.position;
+        startBoxRot = box.transform.localEulerAngles;
+
+        box.ToggleActive(true);
 
         box.transform.DOMove(inspectTF.position, moveTime);
         box.transform.DORotate(inspectTF.localEulerAngles, moveTime);
     }
 
     public void ReturnBox() {
-        boxes[activeIndex].transform.DOMove(startPos, moveTime);
-        boxes[activeIndex].transform.DORotate(startRot, moveTime);
+        boxes[activeIndex].ToggleActive(false);
+
+        boxes[activeIndex].transform.DOMove(startBoxPos, moveTime);
+        boxes[activeIndex].transform.DORotate(startBoxRot, moveTime);
+    }
+
+    public void SetActiveItem(Item item) {
+        startItemPos = item.transform.localPosition;
+        startItemRot = item.transform.rotation;
+
+        selectedItem = item;
+
+        item.transform.DOMove(itemTF.position, moveTime);
+        item.transform.DORotateQuaternion(itemTF.rotation, moveTime);
+    }
+
+    public void ReturnItem() {
+        selectedItem.transform.DOLocalMove(startItemPos, moveTime);
+        selectedItem.transform.DORotateQuaternion(startItemRot, moveTime);
     }
 
     //assigns items to boxes
