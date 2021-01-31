@@ -7,7 +7,7 @@ public class PositionDebugUI : MonoBehaviour {
 
     void OnDrawGizmos() {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(this.transform.position, 2);
+        Gizmos.DrawSphere(this.transform.position, 0.075f);
 
         if (transitionPoint != null) {
             Gizmos.color = Color.green;
