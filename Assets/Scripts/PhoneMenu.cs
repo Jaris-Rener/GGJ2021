@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhoneMenu : MonoBehaviour {
     public bool isPhoneOpen = false;
     public GameObject Apps, Credits, Messages;
     public Transform PhoneOpen, PhoneClose;
+    public MessageHandler MessageHandler;
+
+    private Message _curMessage;
+
+    public TextMeshProUGUI MessageText;
+    public TextMeshProUGUI MessageName;
+    public Image MessagePortrait;
 
     void Start() {
+        Messages.transform.localScale = new Vector3(0, 0, 1);
+        Credits.transform.localScale = new Vector3(0, 0, 1);
         Apps.SetActive(true);
-        Credits.SetActive(false);
-        Messages.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,7 +37,18 @@ public class PhoneMenu : MonoBehaviour {
     }
 
     public void StartGame() {
-        Debug.Log("Starting the game");
+        GoToMessages();
+        transform.DOComplete();
+        transform.DOPunchRotation(new Vector3(0, 0, 7.5f), 0.135f);
+        _curMessage = MessageHandler.GenerateRequest();
+        SetMessage(_curMessage);
+    }
+
+    private void SetMessage(Message message)
+    {
+        MessageText.text = message.Text;
+        MessageName.text = message.Sender;
+        MessagePortrait.sprite = message.Portrait;
     }
 
     public void GoToGallery() {
@@ -35,19 +56,22 @@ public class PhoneMenu : MonoBehaviour {
     }
 
     public void GoToMessages() {
-        Apps.SetActive(false);
-        Messages.SetActive(true);
+        Messages.transform.localScale = new Vector3(0, 0, 1);
+        Messages.transform.DOComplete();
+        Messages.transform.DOScale(1, 0.15f);
     }
 
     public void GoToCredits() {
-        Apps.SetActive(false);
-        Credits.SetActive(true);
+        Credits.transform.localScale = new Vector3(0, 0, 1);
+        Credits.transform.DOComplete();
+        Credits.transform.DOScale(1, 0.15f);
     }
 
     public void ReturnToMenu() {
-        Apps.SetActive(true);
-        Credits.SetActive(false);
-        Messages.SetActive(false);
+        Credits.transform.DOComplete();
+        Credits.transform.DOScale(0, 0.15f);
+        Messages.transform.DOComplete();
+        Messages.transform.DOScale(0, 0.15f);
     }
 
     public void QuitGame() {
