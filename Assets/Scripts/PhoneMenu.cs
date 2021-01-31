@@ -56,6 +56,7 @@ public class PhoneMenu : MonoBehaviour {
         MessageBackButton.gameObject.SetActive(false);
         PhoneCloseButton.gameObject.SetActive(true);
         ScreenFader.Instance.SetFocusDistance(6, 1);
+        GarageManager.instance?.SetStart();
     }
 
     public void SetMessage(Message message)
