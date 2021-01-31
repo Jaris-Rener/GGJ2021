@@ -20,7 +20,7 @@ public class ItemGallery
 
     public void NextItem()
     {
-        CurrentObject.MeshRenderer.material.DOFade(0.0f, 0.4f).SetEase(Ease.OutQuart);
+        CurrentObject.MeshRenderer.material.DOFloat(0.0f, "_Alpha1", 0.4f).SetEase(Ease.OutQuart);
         CurrentObject.transform.DOMove(_layoutPositionLeft, 0.6f);
 
         ++_currentObjIndex;
@@ -32,7 +32,7 @@ public class ItemGallery
 
         CurrentObject.transform.position = _layoutPositionRight;
 
-        CurrentObject.MeshRenderer.material.DOFade(1.0f, 0.4f).SetEase(Ease.InQuart);
+        CurrentObject.MeshRenderer.material.DOFloat(1.0f, "_Alpha1", 0.4f).SetEase(Ease.InQuart);
         CurrentObject.transform.DOMove(_layoutPositionMid, 0.6f);
 
         OnItemChange?.Invoke(CurrentObject);
@@ -41,7 +41,7 @@ public class ItemGallery
 
     public void PreviousItem()
     {
-        CurrentObject.MeshRenderer.material.DOFade(0.0f, 0.4f).SetEase(Ease.OutQuart);
+        CurrentObject.MeshRenderer.material.DOFloat(0.0f, "_Alpha1", 0.4f).SetEase(Ease.OutQuart);
         CurrentObject.transform.DOMove(_layoutPositionRight, 0.6f);
 
         --_currentObjIndex;
@@ -53,7 +53,7 @@ public class ItemGallery
 
         CurrentObject.transform.position = _layoutPositionLeft;
 
-        CurrentObject.MeshRenderer.material.DOFade(1.0f, 0.4f).SetEase(Ease.InQuart);
+        CurrentObject.MeshRenderer.material.DOFloat(1.0f, "_Alpha1", 0.4f).SetEase(Ease.InQuart);
         CurrentObject.transform.DOMove(_layoutPositionMid, 0.6f);
 
         OnItemChange?.Invoke(CurrentObject);
@@ -81,15 +81,17 @@ public class ItemGallery
             var item = items.FirstOrDefault(x => x.Data.Name == itemName);
             if (item == null)
                 continue;
-
+            
             print($"spawning {itemName}");
-            CollectedObjects.Add(Instantiate(item, transform));
+            var obj = Instantiate(item, transform);
+            obj.MeshRenderer.material.SetFloat("_PropFade", 0);
+            CollectedObjects.Add(obj);
         }
     }
 
-    private Vector3 _layoutPositionLeft => transform.position + new Vector3(-0.7f, 0, -0.3f);
+    private Vector3 _layoutPositionLeft => transform.position + new Vector3(-2f, 0, -0.3f);
     private Vector3 _layoutPositionMid => transform.position;
-    private Vector3 _layoutPositionRight => transform.position + new Vector3(0.7f, 0, -0.3f);
+    private Vector3 _layoutPositionRight => transform.position + new Vector3(2f, 0, -0.3f);
 
     private void SetupItems()
     {
@@ -101,7 +103,8 @@ public class ItemGallery
 
         for (int i = 1; i < CollectedObjects.Count; i++)
         {
-            CollectedObjects[i].MeshRenderer.material.color = new Color(1f, 1f, 1f, 0f);
+            CollectedObjects[i].MeshRenderer.material.SetFloat("_Alpha1", 0);
+            CollectedObjects[i].transform.position = _layoutPositionLeft;
         }
 
         CurrentObject = CollectedObjects[0];
