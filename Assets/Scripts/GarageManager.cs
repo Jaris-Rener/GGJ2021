@@ -45,7 +45,7 @@ public class GarageManager : MonoBehaviour, IStateManaged
                 RequestState(new BoxState(this));
             }
             else if (stateMachine.currentState is BoxState) {
-                BoxManager.instance?.SetActiveItem(hit.collider.GetComponent<Item>());
+                BoxManager.instance?.SetActiveItem(hit.collider.GetComponentInParent<Item>());
                 RequestState(new ItemState(this));
             }
         }

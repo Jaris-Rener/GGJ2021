@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7623251688756641957}
   - component: {fileID: 8550021251933146666}
   - component: {fileID: 3825055624229058678}
-  m_Layer: 0
-  m_Name: GolfClub(UV Edited)
+  m_Layer: 11
+  m_Name: GolfClub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
