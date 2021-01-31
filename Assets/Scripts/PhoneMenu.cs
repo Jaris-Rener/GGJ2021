@@ -9,7 +9,7 @@ public class PhoneMenu : MonoBehaviour {
     public Transform PhoneOpen, PhoneClose;
     public MessageHandler MessageHandler;
 
-    private Message _curMessage;
+    public Message CurMessage;
 
     public TextMeshProUGUI MessageText;
     public TextMeshProUGUI MessageName;
@@ -51,14 +51,14 @@ public class PhoneMenu : MonoBehaviour {
         GoToMessages();
         transform.DOComplete();
         transform.DOPunchRotation(new Vector3(0, 0, 7.5f), 0.135f);
-        _curMessage = MessageHandler.GenerateRequest();
-        SetMessage(_curMessage);
+        CurMessage = MessageHandler.GenerateRequest();
+        SetMessage(CurMessage);
         MessageBackButton.gameObject.SetActive(false);
-        PhoneClose.gameObject.SetActive(true);
-        ScreenFader.Instance.SetFocusDistance(6, 10f);
+        PhoneCloseButton.gameObject.SetActive(true);
+        ScreenFader.Instance.SetFocusDistance(6, 1);
     }
 
-    private void SetMessage(Message message)
+    public void SetMessage(Message message)
     {
         MessageText.text = message.Text;
         MessageName.text = message.Sender;
@@ -66,7 +66,7 @@ public class PhoneMenu : MonoBehaviour {
     }
 
     public void GoToGallery() {
-        Debug.Log("Going to gallery");
+        SceneController.Instance.LoadScene("Gallery");
     }
 
     public void GoToMessages() {
@@ -91,5 +91,10 @@ public class PhoneMenu : MonoBehaviour {
     public void QuitGame() {
         Debug.Log("Quitting game");
         Application.Quit();
+    }
+
+    public void Show()
+    {
+        isPhoneOpen = true;
     }
 }

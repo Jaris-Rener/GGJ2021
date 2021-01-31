@@ -11,6 +11,9 @@ public class ScreenFader
     public PostProcessVolume PostProcess;
     private DepthOfField _dof;
 
+    public bool IsFading => _isFading;
+    private bool _isFading;
+
     private void Start()
     {
         _dof = PostProcess.profile.GetSetting<DepthOfField>();
@@ -23,6 +26,8 @@ public class ScreenFader
 
     public void Fade(Color color, float duration = 1f)
     {
-        Fader.DOColor(color, duration);
+        _isFading = true;
+        Fader.DOComplete();
+        Fader.DOColor(color, duration).OnComplete(() => _isFading = false);
     }
 }

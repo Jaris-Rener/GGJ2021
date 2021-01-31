@@ -23,7 +23,7 @@ public class MessageHandler : MonoBehaviour
         _tags = Resources.LoadAll<ItemTag>("Tags");
     }
 
-    public void GenerateResponse(Message message, bool correctTag)
+    public Message GenerateResponse(Message message, bool correctTag)
     {
         var template = correctTag
             ? _goodResponseTemplates.RandomElement().Trim()
@@ -42,6 +42,8 @@ public class MessageHandler : MonoBehaviour
         print($"Reply From: {response.Sender}\n" +
               $"> {response.Text}\n" +
               $"({response.Tag})");
+
+        return response;
     }
 
     [ContextMenu("Generate")]

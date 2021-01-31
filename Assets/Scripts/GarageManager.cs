@@ -129,4 +129,9 @@ public class GarageManager : MonoBehaviour, IStateManaged
         }
     }
     #endregion
+
+    public void ResetState()
+    {
+        stateMachine.ChangeState(new GarageState(this));
+    }
 }

@@ -17,6 +17,7 @@ public class BoxManager : MonoBehaviour
     public Transform itemTF;
     public ItemRotator rotator;
     public ParticleSystem selectParticles;
+    public PhoneMenu phone;
 
     public static BoxManager instance;
 
@@ -46,6 +47,7 @@ public class BoxManager : MonoBehaviour
 
     public void SetActiveItem(Item item)
     {
+        ScreenFader.Instance.SetFocusDistance(0.15f);
         selectedItem = item;
         rotator.SetItem(item);
 
@@ -55,17 +57,34 @@ public class BoxManager : MonoBehaviour
 
     public void ReturnItem()
     {
+        ScreenFader.Instance.SetFocusDistance(6f);
         rotator.SetItem(null);
         selectedItem.transform.DOLocalMove(selectedItem.StartPosLocal, moveTime);
         selectedItem.transform.DOLocalRotateQuaternion(selectedItem.StartRotLocal, moveTime);
     }
 
-    public void SelectItem() {
-        rotator.SetItem(null);
-        selectedItem.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
-        selectParticles.Play();
-        ItemManager.Instance.AddItem(selectedItem);
-        ScreenFader.Instance.SetFocusDistance(0.1f);
+    public void SelectItem()
+    {
+        StartCoroutine(Coro());
+
+        IEnumerator Coro()
+        {
+            rotator.SetItem(null);
+            UIManager.instance.ToggleItemCanvas(false);
+            UIManager.instance.ToggleBoxCanvas(false);
+            selectedItem.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
+            selectParticles.Play();
+            ItemManager.Instance.AddItem(selectedItem);
+            yield return new WaitForSeconds(1f);
+            ReturnBox();
+            GarageManager.instance.ResetState();
+            yield return new WaitForSeconds(2f);
+            phone.SetMessage(phone.MessageHandler.GenerateResponse(phone.CurMessage,
+                selectedItem.Data.Tags.Contains(phone.CurMessage.Tag)));
+            phone.MessageBackButton.gameObject.SetActive(true);
+            phone.PhoneCloseButton.gameObject.SetActive(false);
+            phone.Show();
+        }
     }
 
     //assigns items to boxes
