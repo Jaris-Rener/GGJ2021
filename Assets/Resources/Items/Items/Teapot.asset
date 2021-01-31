@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90eadaf180c6454dbff167ef9afdc190, type: 3}
-  m_Name: Golf Club
+  m_Name: Teapot
   m_EditorClassIdentifier: 
-  Name: Golf Club
-  Description: Would you kindly take this golf club home? It would be a shame to
-    leave it behind.
-  Tags:
-  - {fileID: 11400000, guid: b26bb028fb53c034f991bdb9d2cbcf6e, type: 2}
+  Name: Teapot
+  Description: You can tell this pot has seen it's share of high teas and friendly
+    cuppas. Hopefully there are no ghosts in there.
+  Tags: []
