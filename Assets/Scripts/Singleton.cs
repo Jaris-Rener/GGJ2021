@@ -28,7 +28,7 @@ public class Singleton<T>
         }
         else
         {
-            Debug.LogError($"Existing instance found when initialising Singleton<{typeof(T).Name}>. Destroying this.", this);
+            Debug.Log($"Existing instance found when initialising Singleton<{typeof(T).Name}>. Destroying this.", this);
         }
     }
 }
