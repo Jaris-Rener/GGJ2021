@@ -95,6 +95,9 @@ public class ItemGallery
 
     private void SetupItems()
     {
+        if(CollectedObjects.Count <= 0)
+            return;
+
         CollectedObjects[CollectedObjects.Count - 1].transform.position = _layoutPositionRight;
         CollectedObjects[0].transform.position = _layoutPositionMid;
 

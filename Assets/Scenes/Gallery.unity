@@ -180,8 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A delicious slice of pizza! I wouldn't eat it though, it has probably been
-    here a while!
+  m_text: Come back when you have collected some items!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5b80f93033be9d4692d9dd5951875b6, type: 2}
   m_sharedMaterial: {fileID: -5401290722023714826, guid: f5b80f93033be9d4692d9dd5951875b6, type: 2}
@@ -1023,7 +1022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pepperoni Pizza
+  m_text: No Items!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2ca7d8ab216cf3144b0bf542c93ba1f9, type: 2}
   m_sharedMaterial: {fileID: 8010192790069223224, guid: 2ca7d8ab216cf3144b0bf542c93ba1f9, type: 2}
