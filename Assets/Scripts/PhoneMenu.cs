@@ -18,6 +18,9 @@ public class PhoneMenu : MonoBehaviour {
     public Button MessageBackButton;
     public Button PhoneCloseButton;
 
+    public AudioSource AudioSource;
+    public AudioClip MsgClip;
+
     void Start()
     {
         isPhoneOpen = true;
@@ -47,6 +50,11 @@ public class PhoneMenu : MonoBehaviour {
         }
     }
 
+    public void TogglePhone()
+    {
+        isPhoneOpen = !isPhoneOpen;
+    }
+
     public void StartGame() {
         GoToMessages();
         transform.DOComplete();
@@ -61,6 +69,7 @@ public class PhoneMenu : MonoBehaviour {
 
     public void SetMessage(Message message)
     {
+        AudioSource.PlayOneShot(MsgClip);
         MessageText.text = message.Text;
         MessageName.text = message.Sender;
         MessagePortrait.sprite = message.Portrait;
