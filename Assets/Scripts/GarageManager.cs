@@ -16,7 +16,7 @@ public class GarageManager : MonoBehaviour, IStateManaged
 
     private void Awake() {
         instance = this;
-        stateMachine.ChangeState(new GarageState(this));
+        stateMachine.ChangeState(new PhoneState(this));
     }
 
     private void Start()
@@ -67,7 +67,7 @@ public class GarageManager : MonoBehaviour, IStateManaged
     #region States
     public void RequestState(IState requestedState) {
         if (requestedState is GarageState) {
-            if (stateMachine.currentState is BoxState)
+            if (stateMachine.currentState is BoxState || stateMachine.currentState is PhoneState)
                 stateMachine.ChangeState(requestedState);
         }
 
@@ -78,6 +78,9 @@ public class GarageManager : MonoBehaviour, IStateManaged
             if (stateMachine.currentState is BoxState)
                 stateMachine.ChangeState(requestedState);
         }
+
+        if (requestedState is PhoneState)
+            stateMachine.ChangeState(requestedState);
     }
 
     private class GarageState : IState
@@ -128,9 +131,24 @@ public class GarageManager : MonoBehaviour, IStateManaged
             UIManager.instance?.ToggleItemCanvas(false);
         }
     }
+
+    private class PhoneState : IState
+    {
+        public GarageManager manager;
+        public PhoneState(GarageManager manager) { this.manager = manager; }
+
+        public void Enter() { }
+        public void Execute() { }
+        public void Exit() { }
+    }
     #endregion
 
     public void ResetState()
+    {
+        stateMachine.ChangeState(new PhoneState(this));
+    }
+
+    public void SetStart()
     {
         stateMachine.ChangeState(new GarageState(this));
     }
