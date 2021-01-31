@@ -18500,7 +18500,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -19189,7 +19189,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -25134,7 +25134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 15682bac2c31cb746b4bf10ad39f1409, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 669a23ddacb928340a5f34138cae3696, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -25636,18 +25636,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8755023899632303050, guid: cd33f65adc3264447a879aca3b558e15, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.20000003
-      objectReference: {fileID: 0}
-    - target: {fileID: 8755023899632303050, guid: cd33f65adc3264447a879aca3b558e15, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8755023899632303050, guid: cd33f65adc3264447a879aca3b558e15, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.20000003
-      objectReference: {fileID: 0}
-    - target: {fileID: 8755023899632303050, guid: cd33f65adc3264447a879aca3b558e15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.136
       objectReference: {fileID: 0}
@@ -25674,18 +25662,6 @@ PrefabInstance:
     - target: {fileID: 8755023899632303050, guid: cd33f65adc3264447a879aca3b558e15, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.000000001992528
-      objectReference: {fileID: 0}
-    - target: {fileID: 8755023899632303050, guid: cd33f65adc3264447a879aca3b558e15, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8755023899632303050, guid: cd33f65adc3264447a879aca3b558e15, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8755023899632303050, guid: cd33f65adc3264447a879aca3b558e15, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd33f65adc3264447a879aca3b558e15, type: 3}
@@ -36481,7 +36457,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

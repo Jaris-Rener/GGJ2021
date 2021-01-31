@@ -50,7 +50,7 @@ public class BoxManager : MonoBehaviour
 
     public void SetActiveItem(Item item)
     {
-        ScreenFader.Instance.SetFocusDistance(0.15f);
+        ScreenFader.Instance.SetFocusDistance(0.245f);
         selectedItem = item;
         rotator.SetItem(item);
 
