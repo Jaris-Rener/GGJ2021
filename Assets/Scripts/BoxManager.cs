@@ -65,6 +65,7 @@ public class BoxManager : MonoBehaviour
         selectedItem.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
         selectParticles.Play();
         ItemManager.Instance.AddItem(selectedItem);
+        ScreenFader.Instance.SetFocusDistance(0.1f);
     }
 
     //assigns items to boxes

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -17,10 +15,23 @@ public class PhoneMenu : MonoBehaviour {
     public TextMeshProUGUI MessageName;
     public Image MessagePortrait;
 
-    void Start() {
+    public Button MessageBackButton;
+    public Button PhoneCloseButton;
+
+    void Start()
+    {
+        isPhoneOpen = true;
+        transform.localPosition = PhoneOpen.localPosition;
+        PhoneClose.gameObject.SetActive(false);
         Messages.transform.localScale = new Vector3(0, 0, 1);
         Credits.transform.localScale = new Vector3(0, 0, 1);
         Apps.SetActive(true);
+        ScreenFader.Instance.SetFocusDistance(0.1f, 0);
+    }
+
+    public void HidePhone()
+    {
+        isPhoneOpen = false;
     }
 
     // Update is called once per frame
@@ -42,6 +53,9 @@ public class PhoneMenu : MonoBehaviour {
         transform.DOPunchRotation(new Vector3(0, 0, 7.5f), 0.135f);
         _curMessage = MessageHandler.GenerateRequest();
         SetMessage(_curMessage);
+        MessageBackButton.gameObject.SetActive(false);
+        PhoneClose.gameObject.SetActive(true);
+        ScreenFader.Instance.SetFocusDistance(6, 10f);
     }
 
     private void SetMessage(Message message)
