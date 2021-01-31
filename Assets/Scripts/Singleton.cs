@@ -29,6 +29,7 @@ public class Singleton<T>
         else
         {
             Debug.Log($"Existing instance found when initialising Singleton<{typeof(T).Name}>. Destroying this.", this);
+            Destroy(gameObject);
         }
     }
 }
