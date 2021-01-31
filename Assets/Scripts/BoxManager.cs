@@ -82,6 +82,7 @@ public class BoxManager : MonoBehaviour
             ReturnBox();
             GarageManager.instance.ResetState();
             yield return new WaitForSeconds(2f);
+            selectedItem.ResetAll();
             phone.SetMessage(phone.MessageHandler.GenerateResponse(phone.CurMessage,
                 selectedItem.Data.Tags.Contains(phone.CurMessage.Tag)));
             phone.MessageBackButton.gameObject.SetActive(true);
