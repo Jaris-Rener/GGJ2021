@@ -32,6 +32,9 @@ public class BoxManager : MonoBehaviour
                 activeIndex = i;
         }
 
+        if (phone.isPhoneOpen)
+            phone.HidePhone();
+
         box.ToggleActive(true);
 
         box.transform.DOMove(inspectTF.position, moveTime);
