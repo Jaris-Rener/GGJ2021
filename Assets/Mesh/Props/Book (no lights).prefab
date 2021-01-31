@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 6c0c59b10dcff454aa2f62b8ecd89db5, type: 3}
+  - {fileID: 2100000, guid: f0cce95ee08ce3a42b97012ca615805d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1670192294511167339}
   m_Layer: 0
-  m_Name: Book
+  m_Name: Book (no lights)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
