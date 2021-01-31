@@ -23,7 +23,7 @@ public class MessageHandler : MonoBehaviour
         _tags = Resources.LoadAll<ItemTag>("Tags");
     }
 
-    private void GenerateResponse(Message message, bool correctTag)
+    public void GenerateResponse(Message message, bool correctTag)
     {
         var template = correctTag
             ? _goodResponseTemplates.RandomElement().Trim()
@@ -45,13 +45,13 @@ public class MessageHandler : MonoBehaviour
     }
 
     [ContextMenu("Generate")]
-    private void GenerateRequest()
+    public Message GenerateRequest()
     {
         var template = _templates.RandomElement().Trim();
         var sender = _names.RandomElement();
         var itemTag = _tags.RandomElement();
         var portrait = Portraits.RandomElement();
-        var msg = template.Replace("<tag>", $"<b>{itemTag.Name}</b>").Replace("<name>", sender);
+        var msg = template.Replace("<tag>", $"<color=#0FC><b>{itemTag.Name}</b></color>").Replace("<name>", sender);
 
         var request = new Message
         {
@@ -65,7 +65,7 @@ public class MessageHandler : MonoBehaviour
               $"> {request.Text}\n" +
               $"({request.Tag})");
 
-        GenerateResponse(request, Random.value > 0.5f);
+        return request;
     }
 }
 
